@@ -14,7 +14,7 @@ var resolveProxyReqPath          = require('./app/steps/resolveProxyReqPath');
 var sendProxyRequest             = require('./app/steps/sendProxyRequest');
 var sendUserRes                  = require('./app/steps/sendUserRes');
 
-module.exports = function proxy(host, userOptions) {
+function proxy(host, userOptions) {
   assert(host, 'Host should not be empty');
   return function(ctx, next) {
     var container = new ScopeContainer(ctx, host, userOptions);
@@ -38,3 +38,7 @@ module.exports = function proxy(host, userOptions) {
       .then(next);
   };
 };
+
+
+module.exports = proxy
+module.exports.default = proxy
